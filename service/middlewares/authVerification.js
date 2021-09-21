@@ -1,4 +1,4 @@
-const authVerification = cache => (request, response, next) => {
+const authVerification = (request, response, next) => {
   const userToken = request.get('token');
   if (userToken && userToken === storedToken){
     next();

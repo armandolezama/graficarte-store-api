@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
-const signInDb = require('./Functions/signInDb');
-const dataBase = require('./dataBase.js');
-
-router.use('/signInDb', signInDb(dataBase));
+const dataBaseService = express.Router();
+const DataBase = require('./DataBase.js');
 
 
-module.exports = router;
+
+module.exports = {
+  dataBaseService,
+  DataBase
+};

@@ -1,4 +1,4 @@
-const store = (request, response) => {
+const store = dataBase => (request, response) => {
   response.status = 200;
   response.send({
     products : [

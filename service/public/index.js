@@ -5,8 +5,9 @@ const login = require('./functions/login');
 const signIn = require('./functions/signin');
 const publicStore = require('./functions/store');
 
-router.get('/store', publicStore);
-router.post('/login', login);
-router.post('/signin', signIn);
-
-module.exports = router;
+module.exports = dataBase =>{
+  router.get('/store', publicStore(dataBase));
+  router.post('/login', login(dataBase));
+  router.post('/signin', signIn(dataBase));
+  return router
+};

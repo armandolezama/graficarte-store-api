@@ -1,14 +1,10 @@
-const login = (request, response) => {
-  const ephimeralClient = request.body.ephimeralClient;
-  const clientSessionProof = request.body.proof;
+const login = dataBase => (request, response) => {
+  const { userName, userPassword } = request.body;
 
-  if(ephimeralClient) {
-    //do some validation
-    response.redirect('/login1');
-  } else if(clientSessionProof) {
-    response.status = 401;
-    response.redirect('/login2');
-  };
+  
+  response.redirect('/login');
+
+
 };
 
 module.exports = login;

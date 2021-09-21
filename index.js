@@ -1,19 +1,20 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv').config();
-const service = require('./service');
-const dataBaseService = require('./dataBase');
-const dataBase = require('./dataBase/dataBase');
+const service = require('./Service');
+const { DataBase } = require('./Database');
+const DB = new DataBase();
 
-app.use('/', service);
-app.use('/dbm', dataBaseService);
+app.use('/', service(DB));
 
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT, () => {
     console.log(`Iniciando servidor en ${process.env.PORT}`);
     console.log(`http://localhost:${process.env.PORT}`)
 });
 
-dataBase.connect().catch(error => {
+DB.connect().catch(error => {
     console.log('something went wrong with mongo');
     console.log(error);
-})
+});
+
+
