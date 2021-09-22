@@ -1,17 +1,20 @@
 const Product = function(product) {
+
+  this.productData = {
+    productName : '',
+    productId : '',
+    price: '',
+  };
+  
   for(const property in this.productData){
     if(product[`${property}`]){
       this.productData[`${property}`] = product[`${property}`];
     };
   };
 
-  this.productData = {
-    productName : '',
-    productId : '',
-    price: '',
-  }
-
   this.getProductData = function() {
     return this.productData;
-  }
+  };
 };
+
+module.exports = Product;

@@ -5,7 +5,7 @@ const public = require('./public');
 
 
 
-module.exports = (dataBase) => {
+module.exports = dataBase => {
   
   router.use(express.json());
   router.use(cors());

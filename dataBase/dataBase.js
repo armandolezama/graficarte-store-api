@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb');
 const mongoConnection = new MongoClient(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true });
-const UserCredentials = require('./schemas/user/UserCredentials.js');
-const UserRegistry = require('./schemas/user/UserRegistry');
+const schemas = require('./schemas')
 //const mongoDataBase = mongoConnection.db('graficarteDB');
 
 const DataBase = function () {
@@ -15,10 +14,7 @@ const DataBase = function () {
       console.log(error)
     }
   };
-  this.models = {
-    UserCredentials,
-    UserRegistry
-  };
+  this.models = schemas;
   this.saveData = async function (collection, data, manyDocuments) {
     const mongoCollection = this.mongoDB.collection(`${collection}`);
     if(manyDocuments){
