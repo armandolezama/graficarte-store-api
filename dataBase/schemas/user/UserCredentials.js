@@ -2,6 +2,7 @@ const UserCredentials = function (userData) {
 
   this.userCredentials = {
     user : '',
+    email: '',
     password : ''
   };
   

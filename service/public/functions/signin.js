@@ -1,9 +1,9 @@
 const signIn = dataBase => async (request, response) => {
-  
   const signInCredentials = new dataBase.models.UserCredentials(
     {
       user: request.body.name, 
-      password: request.body.password
+      password: request.body.password,
+      email: request.body.email
     }
   );
   const userRecord = new dataBase.models.UserRegistry({
