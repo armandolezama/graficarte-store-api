@@ -1,3 +1,7 @@
+/**
+ * TO-DO: Add exclude function for repeated emails
+ */
+
 const signIn = dataBase => async (request, response) => {
   const signInCredentials = new dataBase.models.UserCredentials(
     {
@@ -15,14 +19,14 @@ const signIn = dataBase => async (request, response) => {
 
 
   try {
-    await dataBase.saveData('usersCredentials', {...signInCredentials.getCredentials()});
-  
-    await dataBase.saveData('usersRegistry', {...userRecord.getRegistry()});
-  
-    //await dataBase.saveData('userData', {})
+    const credentialsResponse = await dataBase.saveData('usersCredentials', {...signInCredentials.getCredentials()});
+    const registryResponse = await dataBase.saveData('usersRegistry', {...userRecord.getRegistry()});
+
     response.status(200);
     response.send({
-      message: 'User data setted'
+      message: 'User data setted',
+      credentialsResponse,
+      registryResponse
     }); 
   } catch (error) {
     console.log(error);
