@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const dotenv = require('dotenv').config();
+const config = require('./utils//config');
 const service = require('./Service');
 const { DataBase } = require('./Database');
 const DB = new DataBase();
@@ -9,9 +9,9 @@ const helmet = require("helmet");
 app.use(helmet());
 app.use('/', service(DB));
 
-app.listen(process.env.PORT, () => {
-    console.log(`Iniciando servidor en ${process.env.PORT}`);
-    console.log(`http://localhost:${process.env.PORT}`);
+app.listen(config.PORT, () => {
+    console.log(`Iniciando servidor en ${config.PORT}`);
+    console.log(`http://localhost:${config.PORT}`);
     console.log('Bieeeeen!! :)');
 });
 

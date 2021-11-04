@@ -1,4 +1,4 @@
-const Product = function(product) {
+const Products = function(product) {
 
   this.productData = {
     productName : '',
@@ -17,4 +17,4 @@ const Product = function(product) {
   };
 };
 
-module.exports = Product;
+module.exports = Products;
