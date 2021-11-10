@@ -1,13 +1,15 @@
 /**
  * TO-DO: Add exclude function for repeated emails
  */
+const bcrypt = require('bcrypt');
+const { createToken } = require('../../../utils/tokenModule');
+const config = require('../../../utils/config');
 
 const signIn = dataBase => async (request, response) => {
   const signInCredentials = new dataBase.models.UserCredentials(
     {
-      user: request.body.name, 
-      password: request.body.password,
-      email: request.body.email
+      email: request.body.email,
+      password: bcrypt.hashSync(request.body.password, 10)
     }
   );
   const userRecord = new dataBase.models.UserRegistry({
@@ -24,6 +26,7 @@ const signIn = dataBase => async (request, response) => {
 
     response.status(200);
     response.send({
+      token: createToken({ userId: credentialsResponse.operation.insertedId}),
       message: 'User data setted',
       credentialsResponse,
       registryResponse

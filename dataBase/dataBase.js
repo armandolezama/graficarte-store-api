@@ -211,8 +211,6 @@ const DataBase = function () {
       this.flushData();
     };
 
-    console.log(response)
-
     return response;
   };
 
@@ -230,7 +228,7 @@ const DataBase = function () {
     } catch (error) {
       this.responseDB.error = error;
       console.log(`
-        Error at getDocument:
+        Error at getManyDocument:
         ${error}
       `);
     };

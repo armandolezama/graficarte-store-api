@@ -1,33 +1,43 @@
 /**
  * TO-DO: Create login functionaliti
  */
+const bcrypt = require("bcrypt");
+const { createToken } = require('../../../utils/tokenModule');
 
 const login = dataBase => async (request, response) => {
-  const { user, password } = request.body;
+  const { email, password } = request.body;
   dataBase.collection = 'usersCredentials';
-  dataBase.filter = {user : user};
+  dataBase.filter = {email : email};
   const responseData = {
     status: 0,
     payload: {},
     error: {},
   };
 
-  const loginSucces = {
-    message: 'welcome'
+  const loginSucces = token => {
+    return {
+      token,
+      message: 'welcome'
+    }
   };
 
-  const loginError = {
+  const loginError = () => { 
+    return {
     message: 'wrong credentials'
+    };
   };
   
   try {
     responseData.status = 200;
     const credential = await dataBase.getDocument();
-    responseData.payload = credential.password === password ? loginSucces : loginError;
+    const passwordIsValid = bcrypt.compareSync(password, credential.password);
+    responseData.payload = passwordIsValid ? loginSucces(createToken({userId: credential._id})) : loginError();
   } catch (error) {
     responseData.status = 500;
     responseData.error = error;
   }
+
+  console.log(responseData.payload)
   response.status(responseData.status);
   response.send({
     payload: responseData.payload,

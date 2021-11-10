@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
  * Expiration unit measure: https://github.com/vercel/ms
  */
 
-const createToken = user => jwt.sign(user, config.ACCESS_TOKEN_SECRET, { expiresIn: config.ACCESS_TOKEN_EXPIRATION });
+const createToken = payload => jwt.sign(payload, config.ACCESS_TOKEN_SECRET, { expiresIn: config.ACCESS_TOKEN_EXPIRATION });
 
-const createRefreshToken = user => jwt.sign(user, config.REFRESH_TOKEN_SECRET)
+const createRefreshToken = payload => jwt.sign(payload, config.REFRESH_TOKEN_SECRET)
 
 const verifyToken = refreshToken => {
   const tokenStatus = {
