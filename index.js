@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const config = require('./utils//config');
-const service = require('./Service');
-const { DataBase } = require('./Database');
+const service = require('./Services');
+const DataBase = require('./Database');
 const DB = new DataBase();
 const helmet = require("helmet");
 

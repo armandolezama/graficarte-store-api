@@ -7,7 +7,7 @@ const config = {
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
   ACCESS_TOKEN_EXPIRATION: process.env.ACCESS_TOKEN_EXPIRATION,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
-  SALT_ROUNDS: process.env.SALT_ROUNDS
+  SALT_ROUNDS: parseInt(process.env.SALT_ROUNDS)
 };
 
 module.exports = config;
