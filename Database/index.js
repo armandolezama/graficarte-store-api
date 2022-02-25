@@ -1,3 +1,7 @@
 const DataBase = require('./DataBase.js');
 
-module.exports = DataBase;
+const DBInstance = new DataBase();
+
+DBInstance.connect();
+
+module.exports = DBInstance;
