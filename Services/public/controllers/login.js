@@ -29,8 +29,11 @@ const wrongCredentialsError = () => {
 const wrongPasswordError = () => {
   return {
     status: 400,
-    message: 'wrong password',
+    message: 'The password you entered is incorrect',
     data: {},
+    error: {
+      info: 'incorrect password',
+    },
     };
 };
 
@@ -41,13 +44,11 @@ const login = dataBase => async (request, response) => {
   dataBase.filter = {email : email};
   
   const responseData = {
-    status: 0,
     payload: {},
     error: {},
   };
   
   try {
-    responseData.status = 200;
     const credential = await dataBase.getDocument();
     const userIsValid = credential.operation !== null;
     if(userIsValid) {
@@ -72,12 +73,12 @@ const login = dataBase => async (request, response) => {
       responseData.payload = wrongCredentialsError();
     }
   } catch (error) {
-    console.log(error)
     responseData.status = 500;
     responseData.error = error;
+    responseData.message = 'Error from server'
   }
   
-  response.status(responseData.status);
+  response.status(responseData.payload.status);
   response.send({
     payload: responseData.payload,
     error: responseData.error

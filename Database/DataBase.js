@@ -5,7 +5,7 @@ const schemas = require('./schemas');
 
 const DataBase = function () {
   
-  this.mongoDB = {};
+  this.mongoDB = () => {};
   this.responseDB = {
     operation : {},
     error : {}
@@ -136,7 +136,6 @@ const DataBase = function () {
 
     this.operation = async () => {
       const mongoCollection = this.mongoDB.collection(collection);
-  
       return await mongoCollection.findOne(filter, options);
     }
 
