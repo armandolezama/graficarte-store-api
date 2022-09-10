@@ -11,6 +11,7 @@ const updateOrder = require('./controllers/updateOrder');
 const cancelOrder = require('./controllers/cancelOrder');
 const getUserConfig = require('./controllers/getUserConfig');
 const setUserConfig = require('./controllers/setUserConfig');
+const updateUserData = require('./controllers/updateUserData')
 
 module.exports = dataBase => {
   router.get('/', getOrders(dataBase));
@@ -18,7 +19,8 @@ module.exports = dataBase => {
   router.post('/', createOrder(dataBase));
   router.patch('/', updateOrder(dataBase));
   router.patch('/', setUserConfig(dataBase));
+  router.patch('/updateUserData', updateUserData(dataBase))
   router.delete('/', cancelOrder(dataBase));
   
-  return router
+  return router;
 };

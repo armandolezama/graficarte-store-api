@@ -69,13 +69,13 @@ const DataBase = function () {
     return this.dataBaseFunction();
   };
 
-  this.updateDoc = async function (collection = this.collection, field = this.field, value = this.value, filter = this.filter) {
+  this.updateDoc = async function (collection = this.collection, field = this.field, operator = this.operator, newData = this.newData, filter = this.filter) {
 
     this.operation = async () => {
       const mongoCollection = this.mongoDB.collection(collection);
       const updateDocument = {
         [`${operator}`] : {
-          [`${field}`] : `${value}`
+          [`${field}`] : `${newData}`
         }
       };
       return await mongoCollection.updateOne(filter, updateDocument);
